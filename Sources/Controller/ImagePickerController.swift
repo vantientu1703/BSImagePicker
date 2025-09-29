@@ -31,7 +31,7 @@ open class ImagePickerController: UINavigationController {
     public var settings: Settings = Settings()
     public var doneButton: UIBarButtonItem = UIBarButtonItem(title: "", style: .done, target: nil, action: nil)
     public var cancelButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-    public var albumButton: UIButton = UIButton(type: .custom)
+    public var albumButton: UIButton = UIButton()
     public var selectedAssets: [PHAsset] {
         get {
             return assetStore.assets
@@ -107,7 +107,7 @@ open class ImagePickerController: UINavigationController {
         
         // Setup buttons
         let firstViewController = viewControllers.first
-        albumButton.setTitleColor(albumButton.tintColor, for: .normal)
+        albumButton.setTitleColor(.systemBlue, for: .normal)
         albumButton.titleLabel?.font = .systemFont(ofSize: 16)
         albumButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
