@@ -25,7 +25,7 @@ import Photos
 
 // MARK: ImagePickerController
 @objc(BSImagePickerController)
-@objcMembers open class ImagePickerController: UINavigationController {
+open class ImagePickerController: UINavigationController {
     // MARK: Public properties
     public weak var imagePickerDelegate: ImagePickerControllerDelegate?
     public var settings: Settings = Settings()
@@ -83,7 +83,7 @@ import Photos
         fatalError("init(coder:) has not been implemented")
     }
 
-    public override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         
         // Sync settings
@@ -111,13 +111,14 @@ import Photos
         albumButton.titleLabel?.font = .systemFont(ofSize: 16)
         albumButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
-        let arrowView = ArrowView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
-        arrowView.backgroundColor = .clear
-        arrowView.strokeColor = albumButton.tintColor
-        let image = arrowView.asImage
+        //let arrowView = ArrowView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
+        //arrowView.backgroundColor = .clear
+        //arrowView.strokeColor = albumButton.tintColor
+        //let image = arrowView.asImage
 
-        albumButton.setImage(image, for: .normal)
-        albumButton.semanticContentAttribute = .forceRightToLeft // To set image to the right without having to calculate insets/constraints.
+        //albumButton.setImage(image, for: .normal)
+        albumButton.setTitle("Manage photos", for: .normal)
+        //albumButton.semanticContentAttribute = .forceRightToLeft // To set image to the right without having to calculate insets/constraints.
         albumButton.addTarget(self, action: #selector(ImagePickerController.albumsButtonPressed(_:)), for: .touchUpInside)
         firstViewController?.navigationItem.titleView = albumButton
 
@@ -155,6 +156,6 @@ import Photos
     }
 
     func updateAlbumButton() {
-        albumButton.isHidden = albums.count < 2
+        albumButton.isHidden = !(ImagePickerController.currentAuthorization == .restricted)
     }
 }

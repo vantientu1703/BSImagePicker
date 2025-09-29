@@ -21,17 +21,23 @@
 // SOFTWARE.
 
 import UIKit
+import Photos
 
 extension ImagePickerController {
     @objc func albumsButtonPressed(_ sender: UIButton) {
-        albumsViewController.albums = albums
-        
-        // Setup presentation controller
-        albumsViewController.transitioningDelegate = dropdownTransitionDelegate
-        albumsViewController.modalPresentationStyle = .custom
-        rotateButtonArrow()
-        
-        present(albumsViewController, animated: true)
+//        albumsViewController.albums = albums
+//        
+//        // Setup presentation controller
+//        albumsViewController.transitioningDelegate = dropdownTransitionDelegate
+//        albumsViewController.modalPresentationStyle = .custom
+//        rotateButtonArrow()
+//        
+//        present(albumsViewController, animated: true)
+        if #available(iOS 14, *) {
+            PHPhotoLibrary.shared().presentLimitedLibraryPicker(from: self)
+        } else {
+            // Fallback on earlier versions
+        }
     }
 
     @objc func doneButtonPressed(_ sender: UIBarButtonItem) {
