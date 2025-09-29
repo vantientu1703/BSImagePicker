@@ -120,7 +120,8 @@ open class ImagePickerController: UINavigationController {
         albumButton.setTitle("Manage photos", for: .normal)
         //albumButton.semanticContentAttribute = .forceRightToLeft // To set image to the right without having to calculate insets/constraints.
         albumButton.addTarget(self, action: #selector(ImagePickerController.albumsButtonPressed(_:)), for: .touchUpInside)
-        firstViewController?.navigationItem.titleView = albumButton
+        //firstViewController?.navigationItem.titleView = albumButton
+        navigationItem.titleView = albumButton
 
         doneButton.target = self
         doneButton.action = #selector(doneButtonPressed(_:))
