@@ -167,6 +167,11 @@ open class ImagePickerController: UINavigationController {
     }
 
     func updateAlbumButton() {
-        titleLabel.isHidden = !(ImagePickerController.currentAuthorization == .restricted)
+        if #available(iOS 14, *) {
+            titleLabel.isHidden = !(ImagePickerController.currentAuthorization == .limited)
+        } else {
+            // Fallback on earlier versions
+            titleLabel.isHidden = true
+        }
     }
 }
