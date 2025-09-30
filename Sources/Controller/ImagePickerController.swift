@@ -52,6 +52,13 @@ open class ImagePickerController: UINavigationController {
     let albumsViewController = AlbumsViewController()
     let dropdownTransitionDelegate = DropdownTransitionDelegate()
     let zoomTransitionDelegate = ZoomTransitionDelegate()
+    
+    lazy var titleLabel: UILabel = {
+        let l = UILabel()
+        l.text = "Manage photos"
+        l.textColor = .systemBlue
+        return l
+    }()
 
     lazy var albums: [PHAssetCollection] = {
         // We don't want collections without assets.
@@ -109,7 +116,7 @@ open class ImagePickerController: UINavigationController {
         let firstViewController = viewControllers.first
         albumButton.setTitleColor(.systemBlue, for: .normal)
         albumButton.titleLabel?.font = .systemFont(ofSize: 16)
-        albumButton.titleLabel?.adjustsFontSizeToFitWidth = true
+        //albumButton.titleLabel?.adjustsFontSizeToFitWidth = true
 
         //let arrowView = ArrowView(frame: CGRect(x: 0, y: 0, width: 8, height: 8))
         //arrowView.backgroundColor = .clear
@@ -120,8 +127,11 @@ open class ImagePickerController: UINavigationController {
         albumButton.setTitle("Manage photos", for: .normal)
         //albumButton.semanticContentAttribute = .forceRightToLeft // To set image to the right without having to calculate insets/constraints.
         albumButton.addTarget(self, action: #selector(ImagePickerController.albumsButtonPressed(_:)), for: .touchUpInside)
-        //firstViewController?.navigationItem.titleView = albumButton
-        navigationItem.titleView = albumButton
+        titleLabel.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ImagePickerController.albumsButtonPressed(_:)))
+        titleLabel.addGestureRecognizer(tapGesture)
+        firstViewController?.navigationItem.titleView = titleLabel
+        //navigationItem.titleView = label
 
         doneButton.target = self
         doneButton.action = #selector(doneButtonPressed(_:))
@@ -157,6 +167,6 @@ open class ImagePickerController: UINavigationController {
     }
 
     func updateAlbumButton() {
-        albumButton.isHidden = !(ImagePickerController.currentAuthorization == .restricted)
+        titleLabel.isHidden = !(ImagePickerController.currentAuthorization == .restricted)
     }
 }
