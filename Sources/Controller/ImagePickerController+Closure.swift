@@ -67,7 +67,11 @@ import Photos
 
 extension ImagePickerController {
     public static var currentAuthorization : PHAuthorizationStatus {
-        return PHPhotoLibrary.authorizationStatus()
+        if #available(iOS 14, *) {
+            return PHPhotoLibrary.authorizationStatus(for: .readWrite)
+        } else {
+            return PHPhotoLibrary.authorizationStatus()
+        }
     }
 }
 
