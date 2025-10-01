@@ -33,18 +33,14 @@ class ViewController: UIViewController {
         imagePicker.settings.fetch.assets.supportedMediaTypes = [.image, .video]
         imagePicker.settings.selection.unselectOnReachingMax = true
 
-        let start = Date()
         self.presentImagePicker(imagePicker, select: { (asset) in
             print("Selected: \(asset)")
         }, deselect: { (asset) in
             print("Deselected: \(asset)")
         }, cancel: { (assets) in
             print("Canceled with selections: \(assets)")
-        }, finish: { (assets) in
+        }, completion: { (assets) in
             print("Finished with selections: \(assets)")
-        }, completion: {
-            let finish = Date()
-            print(finish.timeIntervalSince(start))
         })
     }
     
@@ -83,7 +79,7 @@ class ViewController: UIViewController {
             print("Deselected: \(asset)")
         }, cancel: { (assets) in
             print("Canceled with selections: \(assets)")
-        }, finish: { (assets) in
+        }, completion: { (assets) in
             print("Finished with selections: \(assets)")
         })
     }
@@ -107,7 +103,7 @@ class ViewController: UIViewController {
             print("Deselected: \(asset)")
         }, cancel: { (assets) in
             print("Canceled with selections: \(assets)")
-        }, finish: { (assets) in
+        }, completion: { (assets) in
             print("Finished with selections: \(assets)")
         })
     }
