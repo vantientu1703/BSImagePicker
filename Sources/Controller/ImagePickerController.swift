@@ -135,6 +135,8 @@ open class ImagePickerController: UINavigationController {
 
         doneButton.target = self
         doneButton.action = #selector(doneButtonPressed(_:))
+        doneButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor.systemBlue], for: .normal)
+        doneButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor : UIColor(displayP3Red: 189 / 255.0, green: 189 / 255.0, blue: 189 / 255.0, alpha: 1)], for: .disabled)
         firstViewController?.navigationItem.rightBarButtonItem = doneButton
 
         cancelButton.target = self
