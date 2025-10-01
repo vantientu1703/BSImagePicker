@@ -41,10 +41,11 @@ extension ImagePickerController {
     }
 
     @objc func doneButtonPressed(_ sender: UIBarButtonItem) {
-        imagePickerDelegate?.imagePicker(self, didFinishWithAssets: assetStore.assets)
-        
         if settings.dismiss.enabled {
-            dismiss(animated: true)
+            dismiss(animated: true) { [weak self] in
+                guard let self else { return }
+                imagePickerDelegate?.imagePicker(self, didFinishWithAssets: assetStore.assets)
+            }
         }
     }
 
